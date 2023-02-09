@@ -15,6 +15,9 @@ public class ProductComponent {
   private String price;
   private String reviews;
 
+  public ProductComponent() {
+  }
+
   public ProductComponent(WebElement container) {
     this.image = container.findElement(By.xpath(".//img[@class='product-image-photo']"));
     this.nameWe = container.findElement(By.xpath(".//a[@class='product-item-link']"));

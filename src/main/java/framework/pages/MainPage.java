@@ -32,6 +32,19 @@ public class MainPage extends BasePage {
     return products;
   }
 
+  @SneakyThrows
+  public ProductComponent getProductByName(List<ProductComponent> products,
+      String nameToSearch) {
+
+    for (ProductComponent product : products) {
+      if (product.getName().equals(nameToSearch)) {
+        return product;
+      }
+    }
+    return new ProductComponent();
+  }
+
+
   public void selectFromPriceDropdown(String value) {
     selectByText(priceDropdownLocator, value);
   }
