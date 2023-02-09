@@ -1,6 +1,7 @@
 package ui;
 
 import com.github.javafaker.Faker;
+import framework.pages.MainPage;
 import org.testng.annotations.Test;
 
 public class FakerTest {
@@ -9,9 +10,11 @@ public class FakerTest {
 
   @Test
   public void fakerTest() {
+    MainPage mainPage = new MainPage();
+    mainPage.selectFromPriceDropdown("Price low to high");
 
-    for (int i = 0; i < 20; i++) {
-      System.out.println(faker.name().firstName());
-    }
+    String valueFromCountDropDown = mainPage.getValueFromCountDropDown();
+    String valueFromPriceDropDown = mainPage.getValueFromPriceDropDown();
+
   }
 }

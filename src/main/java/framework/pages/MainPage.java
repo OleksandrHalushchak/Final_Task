@@ -12,6 +12,8 @@ public class MainPage extends BasePage {
   private final By signLinkLocator = By.xpath(
       "//div[@class='panel header']//li[@class='authorization-link']/a");
   private final By productContainerLocator = By.xpath("//li[@class='product-item']");
+  private final By priceDropdownLocator = By.id("input");
+  private final By countDropdownLocator = By.id("input");
 
   public SignInPage clickOnSignInLink() {
     find(signLinkLocator).click();
@@ -28,6 +30,18 @@ public class MainPage extends BasePage {
       products.add(productComponent);
     }
     return products;
+  }
+
+  public void selectFromPriceDropdown(String value) {
+    selectByText(priceDropdownLocator, value);
+  }
+
+  public String getValueFromPriceDropDown() {
+    return getSelectedValue(priceDropdownLocator);
+  }
+
+  public String getValueFromCountDropDown() {
+    return getSelectedValue(countDropdownLocator);
   }
 
 }

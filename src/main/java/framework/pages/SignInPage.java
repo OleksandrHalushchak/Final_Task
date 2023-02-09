@@ -30,4 +30,5 @@ public class SignInPage extends BasePage {
     return find(errorMessageLocator).getText();
   }
 
+
 }
