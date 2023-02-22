@@ -1,7 +1,6 @@
-package framework.pages.helpers;
+package framework;
 
 import com.github.javafaker.Faker;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import lombok.SneakyThrows;
 
@@ -14,7 +13,7 @@ public class Helpers {
   }
 
   @SneakyThrows
-  public static void readDataFromFile()  {
+  public static void readDataFromFile() {
     FileReader fileReader = new FileReader("src/test/resources/addresses.csv");
   }
 }

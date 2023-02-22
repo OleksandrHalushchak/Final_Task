@@ -1,4 +1,4 @@
-package framework.pages;
+package framework;
 
 import org.openqa.selenium.By;
 

@@ -1,4 +1,4 @@
-package framework.pages.components;
+package framework;
 
 import lombok.Getter;
 import org.openqa.selenium.By;

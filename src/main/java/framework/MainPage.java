@@ -1,6 +1,5 @@
-package framework.pages;
+package framework;
 
-import framework.pages.components.ProductComponent;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.SneakyThrows;

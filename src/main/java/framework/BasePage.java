@@ -1,4 +1,4 @@
-package framework.pages;
+package framework;
 
 import java.time.Duration;
 import java.util.List;
@@ -12,15 +12,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
 
-  protected static WebDriver driver;
+  //container for driver
+  private static final ThreadLocal<WebDriver> DRIVER_THREAD_LOCAL = new ThreadLocal<>();
 
-
-  public static WebDriver getDriver() {
-    return driver;
+  public static ThreadLocal<WebDriver> getDriverThreadLocal() {
+    return DRIVER_THREAD_LOCAL;
   }
 
-  public static void setDriver(WebDriver webDriver) {
-    driver = webDriver;
+  public static void setDriverThreadLocal(WebDriver driver) {
+    DRIVER_THREAD_LOCAL.set(driver);
+  }
+
+  public static WebDriver getDriver() {
+    return DRIVER_THREAD_LOCAL.get();
   }
 
   public WebElement find(By locator) {
@@ -37,7 +41,7 @@ public class BasePage {
   }
 
   public void scroll(int pixels) {
-    JavascriptExecutor jse = (JavascriptExecutor) driver;
+    JavascriptExecutor jse = (JavascriptExecutor) getDriver();
     jse.executeScript("window.scrollBy(0," + pixels + ")");
   }
 

@@ -4,7 +4,7 @@ import framework.MainPage;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
-public class SignTests extends BaseTest {
+public class SignTests2 extends BaseTest {
 
   private final MainPage mainPage = new MainPage();
 

@@ -7,7 +7,7 @@ import java.util.Objects;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
-public class ProductsTests extends BaseTest {
+public class ProductsTests2 extends BaseTest {
 
   private final MainPage mainPage = new MainPage();
 
