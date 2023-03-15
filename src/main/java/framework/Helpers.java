@@ -1,19 +1,31 @@
 package framework;
 
 import com.github.javafaker.Faker;
-import java.io.FileReader;
-import lombok.SneakyThrows;
+import java.text.SimpleDateFormat;
 
 public class Helpers {
 
   private static Faker faker = new Faker();
 
-  public static String generateInvalidPhone(int digits) {
-    return faker.number().digits(digits);
+  public static String generateValidFirstName() {
+    return faker.name().firstName();
   }
 
-  @SneakyThrows
-  public static void readDataFromFile() {
-    FileReader fileReader = new FileReader("src/test/resources/addresses.csv");
+  public static String generateValidLastName() {
+    return faker.name().lastName();
   }
+
+  public static String generateValidEmail() {
+    return faker.internet().emailAddress();
+  }
+  public static String generateValidPassword() {
+    return faker.internet().password();
+  }
+  public static String generateValidBirthdate(){
+    String birthdate = String.valueOf(faker.date().birthday());
+    SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+    return formatter.format(birthdate);
+  }
+
+
 }

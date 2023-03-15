@@ -2,31 +2,16 @@
 
 <suite name="Suite1" verbose="1">
 
-  <test name="Registration">
+  <test name="TestCase1">
     <classes>
-      <class name="ui.ProductsTests"/>
+      <class name="ui.TestCase1"/>
     </classes>
   </test>
 
-  <test name="Registration2">
+  <test name="TestCase2">
     <classes>
-      <class name="ui.ProductsTests"/>
+      <class name="ui.TestCase2"/>
     </classes>
   </test>
-
-  <test name="Registration3">
-    <classes>
-      <class name="ui.ProductsTests"/>
-    </classes>
-  </test>
-
-
-<!--  <test name="Cart">-->
-<!--    <classes>-->
-<!--      <class name="ui.ProductsTests"/>-->
-<!--      <class name="ui.SignTests"/>-->
-<!--    </classes>-->
-<!--  </test>-->
-
 
 </suite>

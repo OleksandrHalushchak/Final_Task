@@ -21,7 +21,7 @@ public class BrowserFactory {
         WebDriverManager.firefoxdriver().setup();
         return new FirefoxDriver();
       default:
-        throw new IllegalStateException("Unexpected value: " + browser);
+        throw new IllegalStateException("Unknown browser: " + browser);
     }
   }
 

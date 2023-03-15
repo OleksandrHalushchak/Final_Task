@@ -40,9 +40,23 @@ public class BasePage {
         .until(ExpectedConditions.presenceOfElementLocated(locator));
   }
 
+  public WebElement waitUntilAppear(By locator, int seconds) {
+    return new WebDriverWait(getDriver(), Duration.ofSeconds(seconds))
+        .until(ExpectedConditions.visibilityOfElementLocated(locator));
+  }
+  public Boolean waitUntilDisappear(By locator, int seconds) {
+    return new WebDriverWait(getDriver(), Duration.ofSeconds(seconds))
+        .until(ExpectedConditions.invisibilityOfElementLocated(locator));
+  }
+
   public void scroll(int pixels) {
     JavascriptExecutor jse = (JavascriptExecutor) getDriver();
     jse.executeScript("window.scrollBy(0," + pixels + ")");
+  }
+
+  public void scrollPageBottom() {
+    JavascriptExecutor jse = (JavascriptExecutor) getDriver();
+    jse.executeScript("window.scrollBy(0, document.body.scrollHeight)");
   }
 
   public void selectByText(By selectLocator, String text) {
