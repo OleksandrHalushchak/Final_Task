@@ -1,26 +1,25 @@
 package ui;
 
-//import framework.MainPage;
-//import java.util.List;
-//import org.assertj.core.api.Assertions;
-//import org.openqa.selenium.WebElement;
-//import org.testng.annotations.Test;
-//
+import framework.Helpers;
+import framework.MainPage;
+import org.assertj.core.api.Assertions;
+import org.testng.annotations.Test;
+
 public class TestCase3ValidData extends BaseTest {
-//
-//  private final MainPage mainPage = new MainPage();
-//
-//  @Test
-////Check your name appear near cart button after registration with valid data
-//  public void checkNameNearCartButton() {
-//
-//    String expectedName = "44";
-//    String actualName = mainPage.
-//
-//    Assertions.assertThat(actualName)
-//        .as("EXPECTED '44'")
-//        .isEqualTo(expectedName);
-//
-//
-//  }
+
+  private final MainPage mainPage = new MainPage();
+
+  @Test
+//Check your name appear near cart button after registration with valid data
+  public void checkNameNearCartButton() {
+
+    String expectedFirstName = Helpers.generateValidFirstName();
+    String expectedLastName = Helpers.generateValidLastName();
+    String expectedName = expectedLastName + " " + expectedFirstName;
+    String actualName = mainPage.clickSignIn().clickCreateAccount()
+        .createAccount(expectedFirstName, expectedLastName, Helpers.generateValidEmail(),
+            Helpers.generateValidPassword(), Helpers.generateValidBirthdate())
+        .clickSaveButtonValidData().getUserNameNearCartButton();
+    Assertions.assertThat(actualName).as("EXPECTED" + expectedName).isEqualTo(expectedName);
+  }
 }

@@ -3,7 +3,6 @@ package ui;
 import static framework.BrowserFactory.getBrowser;
 
 import framework.BasePage;
-import framework.BrowserFactory;
 import framework.BrowserFactory.Browsers;
 import framework.MainPage;
 import lombok.extern.log4j.Log4j2;

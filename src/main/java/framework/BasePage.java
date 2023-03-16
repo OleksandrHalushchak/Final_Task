@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -44,6 +45,7 @@ public class BasePage {
     return new WebDriverWait(getDriver(), Duration.ofSeconds(seconds))
         .until(ExpectedConditions.visibilityOfElementLocated(locator));
   }
+
   public Boolean waitUntilDisappear(By locator, int seconds) {
     return new WebDriverWait(getDriver(), Duration.ofSeconds(seconds))
         .until(ExpectedConditions.invisibilityOfElementLocated(locator));
@@ -68,4 +70,11 @@ public class BasePage {
     Select select = new Select(getDriver().findElement(selectLocator));
     return select.getFirstSelectedOption().getText();
   }
+
+//  public void hoverMouse(By locator) {
+//    Actions action = new Actions(driver);
+//    action.moveToElement((WebElement) locator).perform();
+//  }
+
+
 }

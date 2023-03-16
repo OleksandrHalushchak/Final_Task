@@ -7,12 +7,18 @@ public class SignInPage extends BasePage {
   // 'No account? Create one here' link
   private final By createAccountLocator = By.xpath(
       "//div[@class='no-account']//a");
+  //name near cart button
+  private final By nameNearCartButtonLocator = By.xpath(
+      "//a[@class='account']//span[@class='hidden-sm-down']");
 
 
 
-  public SignInPage createAccount() {
+  public CreateAccountPage clickCreateAccount() {
     find(createAccountLocator).click();
-    return this;
+    return new CreateAccountPage();
+  }
+  public String getUserNameNearCartButton() {
+    return find(nameNearCartButtonLocator).getText();
   }
 
 }

@@ -1,18 +1,21 @@
 package framework;
 
+import components.Products;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 @Log4j2
 public class MainPage extends BasePage {
 
   // Loading Message
   private static final By loadingMessageLocator = By.id("loadingMessage");
-//frame Locator
-   private final By frameLocator = By.id("framelive");
+  //frame Locator
+  private final By frameLocator = By.id("framelive");
 
   //text on the buttom of the page near the email field
   private final By buttomPageTextNearEmailFieldLocator = By.id("block-newsletter-label");
@@ -35,10 +38,25 @@ public class MainPage extends BasePage {
   //SignIn Link
   private final By signInLinkLocator = By.xpath(
       "//span[@class='hidden-sm-down']");
+  //Menu Clothes
+  private final By menuClothesLocator = By.id("category-3");
+
+  //Menu Accessories
+  private final By menuAccessoriesLocator = By.id("category-6");
+
+  //Menu Art
+  private final By menuArtLocator = By.id("category-9");
+
+  //sub menu items
+  private final By subMenuLocator = By.xpath(
+      "//div[@class='popover sub-menu js-sub-menu collapse']");
+  // Product container locator
+  private final By productContainerLocator = By.xpath(
+      "//article[@class='product-miniature js-product-miniature']");
 
 
   // wait while the home page loads
-  public  MainPage waitUntilHomePageLoad() {
+  public MainPage waitUntilHomePageLoad() {
     waitUntilAppear(loadingMessageLocator, 10);
     log.info("The spinner appeared");
     waitUntilDisappear(loadingMessageLocator, 20);
@@ -48,8 +66,8 @@ public class MainPage extends BasePage {
 
   // Get text  near the email field on the buttom of the page
   public String getButtomPageTextNearEmailField() {
-      log.info("Page scrolls down");
-   scrollPageBottom();
+    log.info("Page scrolls down");
+    scrollPageBottom();
     scroll(2000);
     waitUntilVisible(buttomPageTextNearEmailFieldLocator, 20);
     log.info("Getting text near email field");
@@ -76,6 +94,7 @@ public class MainPage extends BasePage {
     find(languageDropdownLocator).click();
     return findAll(languageDropdownListLocator);
   }
+
   @SneakyThrows
   public String isUkrainianLanguagePresent(String language1) {
     find(languageDropdownLocator).click();
@@ -94,6 +113,40 @@ public class MainPage extends BasePage {
     return new SignInPage();
   }
 
+//  public void hoverMouse(By locator) {
+//    Actions action = new Actions(driver);
+//    action.moveToElement((WebElement) locator).perform();
+//  }
 
+  public List<String> getCategoriesList(By locator) {
+    //hoverMouse(locator);
+    waitUntilVisible(locator, 10);
+    List<String> categories = new ArrayList<>();
+    List<WebElement> category = findAll(subMenuLocator);
+    for (WebElement webElement : category) {
+      categories.add(webElement.getText());
+    }
+    return categories;
+  }
+  public List<String> getClothesList() {
+    return getCategoriesList(menuClothesLocator);
+  }
+  public List<String> getAccessorieList() {
+    return getCategoriesList(menuAccessoriesLocator);
+  }
+  public List<String> getArtList() {
+    return getCategoriesList(menuArtLocator);
+  }
+
+  // Get product list (containers) from main page
+  @SneakyThrows
+  public List<Products> getAllProductsFromMainPage() {
+    List<Products> product = new ArrayList<>();
+    List<WebElement> containers = findAll(productContainerLocator);
+    for (WebElement container : containers) {
+      Products productComponent = new Products(container);
+      product.add(productComponent);
+    }
+    return product;
+  }
 }
-
