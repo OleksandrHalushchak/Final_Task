@@ -36,7 +36,8 @@ public class BaseTest {
     driver.manage().window().setSize(new Dimension(width, height));
     BasePage.setDriverThreadLocal(driver);
     mainPage.waitUntilHomePageLoad();
-    driver.switchTo().frame((WebElement) frameLocator);
+    driver.switchTo().frame("framelive");
+
 
 
 

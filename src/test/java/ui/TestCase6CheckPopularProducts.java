@@ -1,8 +1,9 @@
 package ui;
 
-import framework.Helpers;
+import components.Products;
 import framework.MainPage;
-import org.assertj.core.api.Assertions;
+import java.util.List;
+import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 public class TestCase6CheckPopularProducts extends BaseTest {
@@ -10,21 +11,50 @@ public class TestCase6CheckPopularProducts extends BaseTest {
   private final MainPage mainPage = new MainPage();
 
   @Test
-//Check that 'First name' higlighted in red--------------------------------
-//Check that pop-up with text 'Invalid name' appear under field
-  public void checkNameNearCartButton() {
 
-    String expectedText  = "Invalid name";
+  public void checkPopularProducts() {
+    SoftAssertions softAssertions = new SoftAssertions();
 
-    String actualText = mainPage.clickSignIn()
-        .clickCreateAccount()
-        .createAccount("James8", Helpers.generateValidLastName(), Helpers.generateValidEmail(),
-            Helpers.generateValidPassword(), Helpers.generateValidBirthdate())
-        .clickSaveButtonInvalidData()
-        .getPopUpText();
+    //Check that 8 products exist in 'POPULAR PRODUCTS' section
+    int expctedNumberOfProducts = 8;
 
-    Assertions.assertThat(actualText)
-        .as("EXPECTED" + expectedText)
-        .isEqualTo(expectedText);
+    int actualNumberOfProducts = mainPage.getAllProducts().size();
+
+    softAssertions.assertThat(actualNumberOfProducts)
+        .as("EXPECTED" + expctedNumberOfProducts)
+        .isEqualTo(expctedNumberOfProducts);
+
+    // Get product list
+
+    List<Products> products = mainPage.getAllProducts();
+
+    // Check that  product list not empty
+    softAssertions.assertThat(products)
+        .as("EXPECTED that list not empty")
+        .isNotEmpty();
+
+    for (Products product : products) {
+
+      // Check that every product has name
+      String actualProductName = product.getName();
+      softAssertions.assertThat(actualProductName)
+          .as("EXPECTED that field not empty")
+          .isNotEmpty();
+
+      // Check that every product has price
+      String actualProductPrice = product.getPrice();
+      softAssertions.assertThat(actualProductPrice)
+          .as("EXPECTED that field not empty")
+          .isNotEmpty();
+
+      // Check that every product  price bigger than 0.00
+      actualProductPrice = actualProductPrice.substring(1);
+      double actualProductPriceDouble = Double.parseDouble(actualProductPrice);
+      softAssertions.assertThat(actualProductPriceDouble)
+          .as("EXPECTED that all prices bigger than 0.00")
+          .isGreaterThan(0);
+    }
+
+    softAssertions.assertAll();
   }
 }

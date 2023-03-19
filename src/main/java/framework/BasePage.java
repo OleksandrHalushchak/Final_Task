@@ -1,7 +1,10 @@
 package framework;
 
+import components.Products;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
+import lombok.SneakyThrows;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -27,6 +30,10 @@ public class BasePage {
   public static WebDriver getDriver() {
     return DRIVER_THREAD_LOCAL.get();
   }
+
+  // Product container locator
+  private final By productContainerLocator = By.xpath(
+      "//article[@class='product-miniature js-product-miniature']");
 
   public WebElement find(By locator) {
     return getDriver().findElement(locator);
@@ -66,15 +73,34 @@ public class BasePage {
     select.selectByVisibleText(text);
   }
 
+  // Sort products by 'argument'
+  public void sortByDropdown(By Locator, String text) {
+    Select selectSortBy = new Select(find(Locator));
+    selectSortBy.selectByVisibleText(text);
+     }
+
+
+
   public String getSelectedValue(By selectLocator) {
     Select select = new Select(getDriver().findElement(selectLocator));
     return select.getFirstSelectedOption().getText();
   }
 
-//  public void hoverMouse(By locator) {
-//    Actions action = new Actions(driver);
-//    action.moveToElement((WebElement) locator).perform();
-//  }
+  public void hoverMouse(By locator) {
+    Actions action = new Actions(getDriver());
+    action.moveToElement(getDriver().findElement(locator)).build().perform();
+  }
 
-
+  // Get product list (containers) from page
+  @SneakyThrows
+  public List<Products> getAllProducts() {
+    waitUntilVisible(productContainerLocator, 20);
+    List<Products> product = new ArrayList<>();
+    List<WebElement> containers = findAll(productContainerLocator);
+    for (WebElement container : containers) {
+      Products productComponent = new Products(container);
+      product.add(productComponent);
+    }
+    return product;
+  }
 }

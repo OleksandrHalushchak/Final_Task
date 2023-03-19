@@ -1,13 +1,12 @@
 package framework;
-
 import components.Products;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 
 @Log4j2
 public class MainPage extends BasePage {
@@ -33,7 +32,7 @@ public class MainPage extends BasePage {
 
   //Language dropdown list
   private final By languageDropdownListLocator = By.xpath(
-      "//ul[@class='dropdown-menu hidden-sm-down']");
+      "//*[@class='dropdown-item']");
 
   //SignIn Link
   private final By signInLinkLocator = By.xpath(
@@ -48,16 +47,29 @@ public class MainPage extends BasePage {
   private final By menuArtLocator = By.id("category-9");
 
   //sub menu items
-  private final By subMenuLocator = By.xpath(
-      "//div[@class='popover sub-menu js-sub-menu collapse']");
-  // Product container locator
-  private final By productContainerLocator = By.xpath(
-      "//article[@class='product-miniature js-product-miniature']");
+  private final By subMenuClothesLocator = By.xpath(
+      "//*[@id='category-3']//li//a");
+  private final By subMenuAccessoriesLocator = By.xpath(
+      "//*[@id='category-6']//li//a");
+  private final By subMenuArtLocator = By.xpath(
+      "//*[@id='category-9']//li//a");
+
+  // 'All products >' under the 'POPULAR PRODUCTS' section
+  private final By allProductsLocator = By.xpath(
+      "//a[@class='all-product-link float-xs-left float-md-right h4']");
+
+
+  // Prices drop locator at the bottom of the page
+  private final By PricesDropLocator = By.id("link-product-page-prices-drop-1");
 
 
   // wait while the home page loads
   public MainPage waitUntilHomePageLoad() {
-    waitUntilAppear(loadingMessageLocator, 10);
+    try {
+      waitUntilAppear(loadingMessageLocator, 10);
+    } catch (TimeoutException e) {
+      log.info("There is no any spinner");
+    }
     log.info("The spinner appeared");
     waitUntilDisappear(loadingMessageLocator, 20);
     log.info("Tests waits while The spinner disappeared");
@@ -86,25 +98,16 @@ public class MainPage extends BasePage {
     return find(SubscribeButtonLocator).getText();
   }
 
-  // public String clickLanguageDropdown() {
-  //   return find(languageDropdownLocator).click();
-//  }
-  @SneakyThrows
-  public List<WebElement> getLanguageList() {
-    find(languageDropdownLocator).click();
-    return findAll(languageDropdownListLocator);
-  }
 
   @SneakyThrows
-  public String isUkrainianLanguagePresent(String language1) {
+  public List<String> getAllLanguages() {
     find(languageDropdownLocator).click();
-    List<WebElement> languageList = getLanguageList();
-    for (WebElement language : languageList) {
-      if (language.getText().equals(language1)) {
-        return "UkrainianLanguagePresent";
-      }
+    List<WebElement> languageList = findAll(languageDropdownListLocator);
+    List<String> list = new ArrayList<>();
+    for (WebElement webElement : languageList) {
+      list.add(webElement.getText());
     }
-    return "UkrainianLanguageNotPresent";
+    return list;
   }
   // Click on 'Sign in' button at the right corner of the page
 
@@ -113,40 +116,56 @@ public class MainPage extends BasePage {
     return new SignInPage();
   }
 
-//  public void hoverMouse(By locator) {
-//    Actions action = new Actions(driver);
-//    action.moveToElement((WebElement) locator).perform();
-//  }
-
-  public List<String> getCategoriesList(By locator) {
-    //hoverMouse(locator);
-    waitUntilVisible(locator, 10);
-    List<String> categories = new ArrayList<>();
-    List<WebElement> category = findAll(subMenuLocator);
+  public List<String> getClothesCategoriesList() {
+    hoverMouse(menuClothesLocator);
+    waitUntilVisible(menuClothesLocator, 10);
+    List<String> clothesCategories = new ArrayList<>();
+    List<WebElement> category = findAll(subMenuClothesLocator);
     for (WebElement webElement : category) {
-      categories.add(webElement.getText());
+      clothesCategories.add(webElement.getText());
     }
-    return categories;
-  }
-  public List<String> getClothesList() {
-    return getCategoriesList(menuClothesLocator);
-  }
-  public List<String> getAccessorieList() {
-    return getCategoriesList(menuAccessoriesLocator);
-  }
-  public List<String> getArtList() {
-    return getCategoriesList(menuArtLocator);
+    return clothesCategories;
   }
 
-  // Get product list (containers) from main page
-  @SneakyThrows
-  public List<Products> getAllProductsFromMainPage() {
-    List<Products> product = new ArrayList<>();
-    List<WebElement> containers = findAll(productContainerLocator);
-    for (WebElement container : containers) {
-      Products productComponent = new Products(container);
-      product.add(productComponent);
+  public List<String> getAccessorCategoriesList() {
+    hoverMouse(menuAccessoriesLocator);
+    waitUntilVisible(menuAccessoriesLocator, 10);
+    List<String> accessorCategories = new ArrayList<>();
+    List<WebElement> category = findAll(subMenuAccessoriesLocator);
+    for (WebElement webElement : category) {
+      accessorCategories.add(webElement.getText());
     }
-    return product;
+    return accessorCategories;
   }
+
+  public List<String> getArtCategoriesList() {
+    hoverMouse(menuArtLocator);
+    waitUntilVisible(menuArtLocator, 10);
+    List<String> artCategories = new ArrayList<>();
+    List<WebElement> category = findAll(subMenuArtLocator);
+    for (WebElement webElement : category) {
+      artCategories.add(webElement.getText());
+    }
+    return artCategories;
+  }
+
+
+  // At the bottom of the page click on 'Prices drop' link
+  public PriceDropPage clickPricesDrop() {
+    scrollPageBottom();
+    log.info("Page scrolls down");
+    find(PricesDropLocator).click();
+    log.info("click Prices drop");
+    return new PriceDropPage();
+  }
+
+  // click on 'All products' link
+  public AllProductsPage clickAllProductsLink() {
+    scroll(1000);
+    log.info("Page scrolls down");
+    find(allProductsLocator).click();
+    log.info("click on 'All products' link");
+    return new AllProductsPage();
+  }
+
 }

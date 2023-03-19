@@ -14,10 +14,12 @@ public class SignInPage extends BasePage {
 
 
   public CreateAccountPage clickCreateAccount() {
+    waitUntilVisible(createAccountLocator, 10);
     find(createAccountLocator).click();
     return new CreateAccountPage();
   }
   public String getUserNameNearCartButton() {
+    waitUntilVisible(nameNearCartButtonLocator, 5);
     return find(nameNearCartButtonLocator).getText();
   }
 

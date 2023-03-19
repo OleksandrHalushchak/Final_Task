@@ -3,6 +3,7 @@ package ui;
 import framework.MainPage;
 import java.util.List;
 import org.assertj.core.api.Assertions;
+import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
@@ -15,18 +16,18 @@ public class TestCase2 extends BaseTest {
   public void checkTextNearEmailField() {
     //
     int expectedNumberOfLanguages = 44;
-    List<WebElement> LanguageList = mainPage.getLanguageList();
-    int actualNumberOfLanguages = LanguageList.size();
-    String a = mainPage.isUkrainianLanguagePresent("Українська");
+    List<String> actualLanguages = mainPage.getAllLanguages();
 
-    Assertions.assertThat(actualNumberOfLanguages)
+    SoftAssertions softAssertions = new SoftAssertions();
+
+    softAssertions.assertThat(actualLanguages)
         .as("EXPECTED '44'")
-        .isEqualTo(expectedNumberOfLanguages);
+        .hasSize(expectedNumberOfLanguages);
 
-    Assertions.assertThat(a)
+    softAssertions.assertThat(actualLanguages)
         .as("EXPECTED 'Українська мова присутня'")
-        .isEqualTo("true");
+        .contains("Українська");
 
-
+    softAssertions.assertAll();
   }
 }

@@ -1,8 +1,11 @@
 package ui;
 
+import static framework.CreateAccountPage.*;
+
 import framework.Helpers;
 import framework.MainPage;
-import org.assertj.core.api.Assertions;
+import framework.CreateAccountPage;
+import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 public class TestCase4InvalidData extends BaseTest {
@@ -10,22 +13,33 @@ public class TestCase4InvalidData extends BaseTest {
   private final MainPage mainPage = new MainPage();
 
   @Test
-//Check that 'First name' higlighted in red--------------------------------
+//Check that 'First name' higlighted in red
 //Check that pop-up with text 'Invalid name' appear under field
   public void checkNameNearCartButton() {
 
-    String expectedText  = "Invalid name";
+    String expectedText = "Invalid format.";
+    String expectedLineColor = "rgb(255, 76, 76)";
 
-    String actualText = mainPage.clickSignIn()
+    mainPage.clickSignIn()
         .clickCreateAccount()
         .createAccount("James8", Helpers.generateValidLastName(), Helpers.generateValidEmail(),
             Helpers.generateValidPassword(), Helpers.generateValidBirthdate())
-        .clickSaveButtonInvalidData()
-        .getPopUpText();
+        .clickSaveButtonInvalidData();
+    CreateAccountPage createAccountPage = new CreateAccountPage();
+    String actualText = createAccountPage.getPopUpText();
+    String actualLineColor = createAccountPage.getLineColor();
 
-    Assertions.assertThat(actualText)
-        .as("EXPECTED" + expectedText)
+    SoftAssertions softAssertions = new SoftAssertions();
+
+    softAssertions.assertThat(actualText)
+        .as("EXPECTED " + expectedText)
         .isEqualTo(expectedText);
+
+    softAssertions.assertThat(actualLineColor)
+        .as("EXPECTED " + expectedLineColor)
+        .contains(expectedLineColor);
+
+    softAssertions.assertAll();
   }
 }
 // колір червоний

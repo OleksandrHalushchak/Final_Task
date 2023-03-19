@@ -15,8 +15,9 @@ public class TestCase3ValidData extends BaseTest {
 
     String expectedFirstName = Helpers.generateValidFirstName();
     String expectedLastName = Helpers.generateValidLastName();
-    String expectedName = expectedLastName + " " + expectedFirstName;
-    String actualName = mainPage.clickSignIn().clickCreateAccount()
+    String expectedName = expectedFirstName + " " + expectedLastName;
+    String actualName = mainPage.clickSignIn()
+        .clickCreateAccount()
         .createAccount(expectedFirstName, expectedLastName, Helpers.generateValidEmail(),
             Helpers.generateValidPassword(), Helpers.generateValidBirthdate())
         .clickSaveButtonValidData().getUserNameNearCartButton();
