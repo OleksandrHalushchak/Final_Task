@@ -40,9 +40,6 @@ public class TestCase8SortingCheck extends BaseTest {
         .isEqualTo("stringNames");
 
 
-
-
-
  softAssertions.assertAll();
   }
 }
