@@ -1,8 +1,9 @@
 package framework;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 
 public class AllProductsPage extends BasePage {
 
@@ -37,12 +38,24 @@ public class AllProductsPage extends BasePage {
   }
 
   //Sort products as 'Argument'
-//  public AllProductsPage sortByArgument(String argument) {
-//    scroll(300);
-//    find(sortProductsLocator).click();
-//    selectByText(sortProductsDropdownMenuLocator, argument);
-//    return this;
- // }
+  public AllProductsPage sortByArgument(SortEnum value) {
+
+    switch (value){
+      case "Name, A to Z":
+        .....
+        break;
+      case "Name, A to Z":
+        .....
+        break;
+
+    }
+    scroll(300);
+    find(sortProductsLocator).click();
+    selectByText(sortProductsDropdownMenuLocator, argument);
+    return this;
+  }
+
+
 
 //Sort products as  'Name, A to Z'
   public AllProductsPage sortByNameAZ() {
@@ -76,7 +89,21 @@ public class AllProductsPage extends BasePage {
     return this;
   }
 
+  public static List<String> sortProductsListAZ(List<String> ListNames) {
+    List<String> sortListNamesAZ = new ArrayList<>();
+    sortListNamesAZ = ListNames;
+    Collections.sort(sortListNamesAZ);
+    return sortListNamesAZ;
 
+  }
+  public static List<String> sortProductsListZA(List<String> ListNames) {
+    List<String> sortListNamesZA = new ArrayList<>();
+    sortListNamesZA = ListNames;
+    Collections.sort(sortListNamesZA);
+    Collections.reverse(sortListNamesZA);
+    return sortListNamesZA;
+
+  }
 
 
 }

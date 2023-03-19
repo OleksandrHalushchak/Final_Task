@@ -3,7 +3,6 @@ package ui;
 import components.Products;
 import framework.MainPage;
 import framework.PriceDropPage;
-import java.math.BigDecimal;
 import java.util.List;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
@@ -51,7 +50,6 @@ public class TestCase7PriceDropCheck extends BaseTest {
           .as("EXPECTED " + expectedProductPrice)
           .isEqualTo(expectedProductPrice);
 
-      // ПРАЦЮЄ ЛИШЕ З ПЕРШИМ КОНТЕЙНЕРОМ
     }
 
     softAssertions.assertAll();
