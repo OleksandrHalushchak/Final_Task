@@ -1,6 +1,10 @@
 package ui;
 
 import static framework.AllProductsPage.*;
+import static framework.AllProductsPage.SortEnum.NameAtoZ;
+import static framework.AllProductsPage.SortEnum.NameZtoA;
+import static framework.AllProductsPage.SortEnum.PriceHighToLow;
+import static framework.AllProductsPage.SortEnum.PriceLowToHigh;
 
 import components.Products;
 import framework.MainPage;
@@ -22,7 +26,7 @@ public class TestCase8SortingCheck extends BaseTest {
 
     // Check that sorting 'Name, A to Z' is correct
     List<String> listNamesAZ = new ArrayList<>();
-    List<Products> productsAZ = mainPage.clickAllProductsLink().sortByNameAZ().getAllProducts();
+    List<Products> productsAZ = mainPage.clickAllProductsLink().sortByArgument(NameAtoZ).getAllProducts();
     for (Products product : productsAZ) {
       String name = product.getName();
       listNamesAZ.add(name);
@@ -38,7 +42,7 @@ public class TestCase8SortingCheck extends BaseTest {
 
     // Check that sorting 'Name, Z to A' is correct
     List<String> listNamesZA = new ArrayList<>();
-    List<Products> productsZA = mainPage.clickAllProductsLink().sortByNameAZ().getAllProducts();
+    List<Products> productsZA = mainPage.clickAllProductsLink().sortByArgument(NameZtoA).getAllProducts();
     for (Products product : productsZA) {
       String name = product.getName();
       listNamesZA.add(name);
@@ -54,7 +58,7 @@ public class TestCase8SortingCheck extends BaseTest {
 
     // Check that sorting 'Price, low to high' is correct
     List<String> listPriceLowHigh = new ArrayList<>();
-    List<Products> productsLowHigh = mainPage.clickAllProductsLink().sortByPriceLowHigh().getAllProducts();
+    List<Products> productsLowHigh = mainPage.clickAllProductsLink().sortByArgument(PriceLowToHigh).getAllProducts();
     for (Products product : productsLowHigh) {
       String name = product.getName();
       listPriceLowHigh.add(name);
@@ -70,7 +74,7 @@ public class TestCase8SortingCheck extends BaseTest {
 
 // Check that sorting 'Price, high to low' is correct
     List<String> listPriceHighLow = new ArrayList<>();
-    List<Products> productsHighLow = mainPage.clickAllProductsLink().sortByPriceHighLow().getAllProducts();
+    List<Products> productsHighLow = mainPage.clickAllProductsLink().sortByArgument(PriceHighToLow).getAllProducts();
     for (Products product : productsHighLow) {
       String name = product.getName();
       listPriceHighLow.add(name);

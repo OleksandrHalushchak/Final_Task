@@ -196,7 +196,7 @@ public class MainPage extends BasePage {
 
   // In the search field enter text press 'Enter'
   public MainPage enterTextInSearchField(String productName) {
-    WebElement searchField = find(searchFieldLocator).sendKeys(productName);
+    WebElement searchField = find(searchFieldLocator);
     searchField.click();
     //  searchField.sendKeys(productName);
     //  searchField.sendKeys(Keys.RETURN);

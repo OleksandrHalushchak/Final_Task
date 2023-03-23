@@ -18,7 +18,7 @@ public class AllProductsPage extends BasePage {
   private final By byNameAZ = By.xpath(
       "//div[@class='dropdown-menu']//a[contains(text(),'Name, A to Z')]");
 
-// Sort products as 'Name, Z to A' locator
+  // Sort products as 'Name, Z to A' locator
   private final By byNameZA = By.xpath(
       "//div[@class='dropdown-menu']//a[contains(text(),'Name, Z to A')]");
 
@@ -40,54 +40,74 @@ public class AllProductsPage extends BasePage {
   //Sort products as 'Argument'
   public AllProductsPage sortByArgument(SortEnum value) {
 
-    switch (value){
-      case "Name, A to Z":
-        .....
+    switch (value) {
+      case NameAtoZ:
+        scroll(300);
+        waitUntilVisible(sortProductsLocator, 10);
+        find(sortProductsLocator).click();
+        find(byNameAZ).click();
         break;
-      case "Name, A to Z":
-        .....
+      case NameZtoA:
+        scroll(300);
+        waitUntilVisible(sortProductsLocator, 10);
+        find(sortProductsLocator).click();
+        find(byNameZA).click();
         break;
-
+      case PriceLowToHigh:
+        scroll(300);
+        waitUntilVisible(sortProductsLocator, 10);
+        find(sortProductsLocator).click();
+        find(byPriceLowHigh).click();
+        break;
+      case PriceHighToLow:
+        scroll(300);
+        waitUntilVisible(sortProductsLocator, 10);
+        find(sortProductsLocator).click();
+        find(byPriceHighLow).click();
+        break;
     }
-    scroll(300);
-    find(sortProductsLocator).click();
-    selectByText(sortProductsDropdownMenuLocator, argument);
-    return this;
+return this;
   }
 
+public enum SortEnum {
+  NameAtoZ,
+  NameZtoA,
+  PriceLowToHigh,
+  PriceHighToLow
+}
 
-
-//Sort products as  'Name, A to Z'
-  public AllProductsPage sortByNameAZ() {
-    scroll(300);
-    waitUntilVisible(sortProductsLocator, 10);
-    find(sortProductsLocator).click();
-    find(byNameAZ).click();
-    return this;
-  }
-//Sort products as  'Name, Z to A'
-    public AllProductsPage sortByNameZA() {
-      scroll(300);
-      find(sortProductsLocator).click();
-      find(byNameZA).click();
-      return this;
-  }
-
-    //Sort products as  'Price, low to high '
-  public AllProductsPage sortByPriceLowHigh() {
-    scroll(300);
-    find(sortProductsLocator).click();
-    find(byPriceLowHigh).click();
-    return this;
-  }
-
-    //Sort products as  'Price, high to low'
-  public AllProductsPage sortByPriceHighLow() {
-    scroll(300);
-    find(sortProductsLocator).click();
-    find(byPriceHighLow).click();
-    return this;
-  }
+//  //Sort products as  'Name, A to Z'
+//  public AllProductsPage sortByNameAZ() {
+//    scroll(300);
+//    waitUntilVisible(sortProductsLocator, 10);
+//    find(sortProductsLocator).click();
+//    find(byNameAZ).click();
+//    return this;
+//  }
+//
+//  //Sort products as  'Name, Z to A'
+//  public AllProductsPage sortByNameZA() {
+//    scroll(300);
+//    find(sortProductsLocator).click();
+//    find(byNameZA).click();
+//    return this;
+//  }
+//
+//  //Sort products as  'Price, low to high '
+//  public AllProductsPage sortByPriceLowHigh() {
+//    scroll(300);
+//    find(sortProductsLocator).click();
+//    find(byPriceLowHigh).click();
+//    return this;
+//  }
+//
+//  //Sort products as  'Price, high to low'
+//  public AllProductsPage sortByPriceHighLow() {
+//    scroll(300);
+//    find(sortProductsLocator).click();
+//    find(byPriceHighLow).click();
+//    return this;
+//  }
 
   public static List<String> sortProductsListAZ(List<String> ListNames) {
     List<String> sortListNamesAZ = new ArrayList<>();
@@ -96,6 +116,7 @@ public class AllProductsPage extends BasePage {
     return sortListNamesAZ;
 
   }
+
   public static List<String> sortProductsListZA(List<String> ListNames) {
     List<String> sortListNamesZA = new ArrayList<>();
     sortListNamesZA = ListNames;
