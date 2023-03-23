@@ -2,6 +2,7 @@ package ui;
 
 
 import components.Products;
+import framework.Helpers;
 import framework.MainPage;
 import java.math.BigDecimal;
 import java.util.List;
@@ -18,7 +19,8 @@ public class TestCase9AddingToCart extends BaseTest {
     SoftAssertions softAssertions = new SoftAssertions();
 
     //In the search field enter 'Bear' and press 'Enter'
-    List<Products> products = mainPage.enterTextInSearchField("Bear").getAllProducts();
+    mainPage.enterTextInSearchField("Bear");
+    List<Products> products = Helpers.getAllProducts();
 
 //On the 'SEARCH RESULTS' page click on 'Brown Bear Notebook
 
@@ -34,13 +36,16 @@ public class TestCase9AddingToCart extends BaseTest {
     }
 
     mainPage.selectPaperType("Doted")
-        .changeQuantity("5")
+        .changeQuantity(Integer.parseInt("5"))
         .clickAddToCartButton();
 
     //Check that new window with title 'Product successfully added to your shopping cart' appears
     String expectedTitle = "Product successfully added to your shopping cart";
     String actualTitle = mainPage.getTitle();
-    actualTitle = actualTitle.substring(1);
+    if (actualTitle.isEmpty()) {
+    } else {
+      actualTitle = actualTitle.substring(1);
+    }
     softAssertions.assertThat(actualTitle)
         .as("EXPECTED " + expectedTitle)
         .isEqualTo(expectedTitle);
@@ -66,8 +71,6 @@ public class TestCase9AddingToCart extends BaseTest {
     BigDecimal productPriceBD = new BigDecimal(productPrice);
     BigDecimal actualQuantityBD = new BigDecimal(actualQuantity);
 
-   // int productPriceInt = Double.parseDouble(productPrice);
-   // int actualQuantityInt = Integer.parseInt(actualQuantity);
     BigDecimal expectedTotalPriceBD = productPriceBD.multiply(actualQuantityBD);
     String expectedTotalPrice = expectedTotalPriceBD.toString();
     String actualTotalPrice = mainPage.getTotalPrice();

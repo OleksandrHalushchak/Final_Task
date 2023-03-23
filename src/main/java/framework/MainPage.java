@@ -58,13 +58,13 @@ public class MainPage extends BasePage {
   private final By pricesDropLocator = By.id("link-product-page-prices-drop-1");
 
   // Search field locator
-  private final By searchFieldLocator = By.id("search_widget");
+  private final By searchFieldLocator = By.xpath("//input[@name='s']");
 
   //'Paper type' selector
   private final By paperTypeSelectorLocator = By.id("group_4");
 
   //'Quantity' Locator
-  private final By quantityLocator = By.id("quantity_wanted");
+  private final By quantityLocator = By.xpath("//i[@class='material-icons touchspin-up']");
 
   //'ADD TO CART' button
   private final By addToCartButtonLocator = By.xpath("//div[@class='add']//button");
@@ -197,9 +197,8 @@ public class MainPage extends BasePage {
   // In the search field enter text press 'Enter'
   public MainPage enterTextInSearchField(String productName) {
     WebElement searchField = find(searchFieldLocator);
-    searchField.click();
-    //  searchField.sendKeys(productName);
-    //  searchField.sendKeys(Keys.RETURN);
+    searchField.sendKeys(productName);
+    searchField.sendKeys(Keys.RETURN);
     return this;
   }
 
@@ -211,10 +210,11 @@ public class MainPage extends BasePage {
   }
 
   // Change 'Quantity' to '5'
-  public MainPage changeQuantity(String quantity) {
-    WebElement Quantity = find(quantityLocator);
-    Quantity.clear();
-    Quantity.sendKeys(quantity);
+  public MainPage changeQuantity(int quantity) {
+
+    for (int i = 1; i < quantity; i++) {
+      find(quantityLocator).click();
+    }
     return this;
   }
 
@@ -226,7 +226,8 @@ public class MainPage extends BasePage {
 
   // Get shopping cart title
   public String getTitle() {
-    waitUntilVisible(windowTitleLocator, 10);
+    ////////////////////////////////////////////////////////////////////// paperTypeShoppingCartLocator!!!
+    waitUntilAppear(paperTypeShoppingCartLocator, 20);
     return find(windowTitleLocator).getText();
   }
 

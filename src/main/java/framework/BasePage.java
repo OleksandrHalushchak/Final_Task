@@ -32,18 +32,18 @@ public class BasePage {
   }
 
   // Product container locator
-  private final By productContainerLocator = By.xpath(
-      "//article[@class='product-miniature js-product-miniature']");
+//  private final By productContainerLocator = By.xpath(
+//      "//article[@class='product-miniature js-product-miniature']");
 
   public WebElement find(By locator) {
     return getDriver().findElement(locator);
   }
 
-  public List<WebElement> findAll(By locator) {
+  public static List<WebElement> findAll(By locator) {
     return getDriver().findElements(locator);
   }
 
-  public WebElement waitUntilVisible(By locator, int seconds) {
+  public static WebElement waitUntilVisible(By locator, int seconds) {
     return new WebDriverWait(getDriver(), Duration.ofSeconds(seconds))
         .until(ExpectedConditions.presenceOfElementLocated(locator));
   }
@@ -92,15 +92,15 @@ public class BasePage {
   }
 
   // Get product list (containers) from page
-  @SneakyThrows
-  public List<Products> getAllProducts() {
-    waitUntilVisible(productContainerLocator, 20);
-    List<Products> product = new ArrayList<>();
-    List<WebElement> containers = findAll(productContainerLocator);
-    for (WebElement container : containers) {
-      Products productComponent = new Products(container);
-      product.add(productComponent);
-    }
-    return product;
-  }
+//  @SneakyThrows
+//  public List<Products> getAllProducts() {
+//    waitUntilVisible(productContainerLocator, 20);
+//    List<Products> product = new ArrayList<>();
+//    List<WebElement> containers = findAll(productContainerLocator);
+//    for (WebElement container : containers) {
+//      Products productComponent = new Products(container);
+//      product.add(productComponent);
+//    }
+//    return product;
+//  }
 }

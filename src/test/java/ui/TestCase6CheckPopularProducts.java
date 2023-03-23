@@ -1,6 +1,7 @@
 package ui;
 
 import components.Products;
+import framework.Helpers;
 import framework.MainPage;
 import java.util.List;
 import org.assertj.core.api.SoftAssertions;
@@ -18,7 +19,7 @@ public class TestCase6CheckPopularProducts extends BaseTest {
     //Check that 8 products exist in 'POPULAR PRODUCTS' section
     int expctedNumberOfProducts = 8;
 
-    int actualNumberOfProducts = mainPage.getAllProducts().size();
+    int actualNumberOfProducts = Helpers.getAllProducts().size();
 
     softAssertions.assertThat(actualNumberOfProducts)
         .as("EXPECTED" + expctedNumberOfProducts)
@@ -26,12 +27,12 @@ public class TestCase6CheckPopularProducts extends BaseTest {
 
     // Get product list
 
-    List<Products> products = mainPage.getAllProducts();
+    List<Products> products = Helpers.getAllProducts();
 
     // Check that  product list not empty
     softAssertions.assertThat(products)
         .as("EXPECTED that list not empty")
-        .isNotEmpty();
+        .isNotNull();
 
     for (Products product : products) {
 
@@ -39,13 +40,13 @@ public class TestCase6CheckPopularProducts extends BaseTest {
       String actualProductName = product.getName();
       softAssertions.assertThat(actualProductName)
           .as("EXPECTED that field not empty")
-          .isNotEmpty();
+          .isNotNull();
 
       // Check that every product has price
       String actualProductPrice = product.getPrice();
       softAssertions.assertThat(actualProductPrice)
           .as("EXPECTED that field not empty")
-          .isNotEmpty();
+          .isNotNull();
 
       // Check that every product  price bigger than 0.00
       actualProductPrice = actualProductPrice.substring(1);

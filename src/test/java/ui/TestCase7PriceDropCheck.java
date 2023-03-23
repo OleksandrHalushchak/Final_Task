@@ -1,6 +1,7 @@
 package ui;
 
 import components.Products;
+import framework.Helpers;
 import framework.MainPage;
 import framework.PriceDropPage;
 import java.util.List;
@@ -17,8 +18,8 @@ public class TestCase7PriceDropCheck extends BaseTest {
     SoftAssertions softAssertions = new SoftAssertions();
 
     //Check that every product has old and new price
-    List<Products> products = mainPage.clickPricesDrop()
-        .getAllProducts();
+    mainPage.clickPricesDrop();
+    List<Products> products = Helpers.getAllProducts();
 
     // Check that  product list not empty
     softAssertions.assertThat(products)
