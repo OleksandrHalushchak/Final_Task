@@ -20,6 +20,7 @@ public class TestCase8SortingCheck extends BaseTest {
     SoftAssertions softAssertions = new SoftAssertions();
 
 
+
     List<Products> products = Helpers.getAllProducts();
 
     // Check that  product list not empty
