@@ -35,7 +35,7 @@ public class BasePage {
 //  private final By productContainerLocator = By.xpath(
 //      "//article[@class='product-miniature js-product-miniature']");
 
-  public WebElement find(By locator) {
+  public static WebElement find(By locator) {
     return getDriver().findElement(locator);
   }
 
@@ -58,7 +58,7 @@ public class BasePage {
         .until(ExpectedConditions.invisibilityOfElementLocated(locator));
   }
 
-  public void scroll(int pixels) {
+  public static void scroll(int pixels) {
     JavascriptExecutor jse = (JavascriptExecutor) getDriver();
     jse.executeScript("window.scrollBy(0," + pixels + ")");
   }
