@@ -23,7 +23,6 @@ public class TestCase9AddingToCart extends BaseTest {
     List<Products> products = Helpers.getAllProducts();
 
 //On the 'SEARCH RESULTS' page click on 'Brown Bear Notebook
-
     String name = "Brown Bear Notebook";
     String productPrice = null;
 

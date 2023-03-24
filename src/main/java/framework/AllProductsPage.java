@@ -38,7 +38,7 @@ public class AllProductsPage extends BasePage {
   }
 
   //Sort products as 'Argument'
-  public AllProductsPage sortByArgument(SortEnum value) {
+  public static AllProductsPage sortByArgument(SortEnum value) {
 
     switch (value) {
       case NameAtoZ:
@@ -66,15 +66,15 @@ public class AllProductsPage extends BasePage {
         find(byPriceHighLow).click();
         break;
     }
-return this;
+    return new AllProductsPage();
   }
 
-public enum SortEnum {
-  NameAtoZ,
-  NameZtoA,
-  PriceLowToHigh,
-  PriceHighToLow
-}
+  public enum SortEnum {
+    NameAtoZ,
+    NameZtoA,
+    PriceLowToHigh,
+    PriceHighToLow
+  }
 
   public static List<String> sortProductsListAZ(List<String> ListNames) {
     List<String> sortListNamesAZ = new ArrayList<>();

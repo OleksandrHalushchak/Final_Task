@@ -36,10 +36,6 @@ public class BaseTest {
     BasePage.setDriverThreadLocal(driver);
     mainPage.waitUntilHomePageLoad();
     driver.switchTo().frame("framelive");
-
-
-
-
   }
 
   @AfterMethod(alwaysRun = true)
@@ -48,7 +44,5 @@ public class BaseTest {
       BasePage.getDriver().quit();
       BasePage.getDriverThreadLocal().remove();
     }
-
   }
-
 }

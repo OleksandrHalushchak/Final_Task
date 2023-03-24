@@ -1,6 +1,5 @@
 package ui;
 
-import static framework.CreateAccountPage.*;
 
 import framework.Helpers;
 import framework.MainPage;
@@ -30,7 +29,6 @@ public class TestCase4InvalidData extends BaseTest {
     String actualLineColor = createAccountPage.getLineColor();
 
     SoftAssertions softAssertions = new SoftAssertions();
-
     softAssertions.assertThat(actualText)
         .as("EXPECTED " + expectedText)
         .isEqualTo(expectedText);
@@ -42,4 +40,3 @@ public class TestCase4InvalidData extends BaseTest {
     softAssertions.assertAll();
   }
 }
-// колір червоний

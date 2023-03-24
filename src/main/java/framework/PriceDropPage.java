@@ -19,6 +19,4 @@ public class PriceDropPage extends BasePage {
 
     return (price.setScale(2, RoundingMode.HALF_UP).toString());
   }
-
-
 }

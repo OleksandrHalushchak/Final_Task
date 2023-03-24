@@ -26,7 +26,6 @@ public class TestCase6CheckPopularProducts extends BaseTest {
         .isEqualTo(expctedNumberOfProducts);
 
     // Get product list
-
     List<Products> products = Helpers.getAllProducts();
 
     // Check that  product list not empty

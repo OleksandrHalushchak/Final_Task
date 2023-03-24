@@ -54,5 +54,5 @@ public class TestCase7PriceDropCheck extends BaseTest {
     }
 
     softAssertions.assertAll();
-}
+  }
 }

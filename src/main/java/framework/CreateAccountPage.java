@@ -1,6 +1,8 @@
 package framework;
 
+
 import org.openqa.selenium.By;
+
 
 public class CreateAccountPage extends BasePage {
 
@@ -21,7 +23,6 @@ public class CreateAccountPage extends BasePage {
       "//div[@class='help-block']//li");
 
   // Create Account
-
   public CreateAccountPage createAccount(String FirstName, String LastName, String Email,
       String Password, String Birthdate) {
     waitUntilVisible(createAccountSocialTitleLocator, 5);
@@ -48,6 +49,7 @@ public class CreateAccountPage extends BasePage {
     find(createAccountSaveButtonLocator).click();
     return new SignInPage();
   }
+
   // Click SAVE (invalid data)
   public CreateAccountPage clickSaveButtonInvalidData() {
     find(createAccountSaveButtonLocator).click();
@@ -60,9 +62,8 @@ public class CreateAccountPage extends BasePage {
     return find(popUpFieldLocator).getText();
   }
 
-// Get higlighted colof of fild 'First name'
+  // Get higlighted colof of fild 'First name'
   public String getLineColor() {
-//String outline = getDriver().findElement(createAccountFirstNameFieldLocator).getCssValue("outline");
     return getDriver().findElement(createAccountFirstNameFieldLocator).getCssValue("outline");
   }
 }

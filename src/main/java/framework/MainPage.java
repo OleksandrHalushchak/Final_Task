@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
+
 
 @Log4j2
 public class MainPage extends BasePage {
@@ -52,7 +52,6 @@ public class MainPage extends BasePage {
   // 'All products >' under the 'POPULAR PRODUCTS' section
   private final By allProductsLocator = By.xpath(
       "//a[@class='all-product-link float-xs-left float-md-right h4']");
-
 
   // Prices drop locator at the bottom of the page
   private final By pricesDropLocator = By.id("link-product-page-prices-drop-1");
@@ -128,17 +127,20 @@ public class MainPage extends BasePage {
   @SneakyThrows
   public List<String> getAllLanguages() {
     find(languageDropdownLocator).click();
+    log.info("Click on language dropdown");
     List<WebElement> languageList = findAll(languageDropdownListLocator);
     List<String> list = new ArrayList<>();
     for (WebElement webElement : languageList) {
       list.add(webElement.getText());
     }
+    log.info("list of languages is collected");
     return list;
   }
-  // Click on 'Sign in' button at the right corner of the page
 
+  // Click on 'Sign in' button at the right corner of the page
   public SignInPage clickSignIn() {
     find(signInLinkLocator).click();
+    log.info("Click on 'Sign in' button");
     return new SignInPage();
   }
 
@@ -226,8 +228,7 @@ public class MainPage extends BasePage {
 
   // Get shopping cart title
   public String getTitle() {
-    ////////////////////////////////////////////////////////////////////// paperTypeShoppingCartLocator!!!
-    waitUntilAppear(paperTypeShoppingCartLocator, 20);
+    waitUntilAppear(windowTitleLocator, 20);
     return find(windowTitleLocator).getText();
   }
 
@@ -253,7 +254,6 @@ public class MainPage extends BasePage {
     find(saveCustomizationButtonLocator).click();
     return this;
   }
-
 
 }
 

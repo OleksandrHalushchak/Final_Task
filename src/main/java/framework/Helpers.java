@@ -13,7 +13,8 @@ import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class Helpers extends BasePage{
+public class Helpers extends BasePage {
+
   // Product container locator
   private static final By productContainerLocator = By.xpath(
       "//article[@class='product-miniature js-product-miniature']");
@@ -31,13 +32,14 @@ public class Helpers extends BasePage{
   public static String generateValidEmail() {
     return faker.internet().emailAddress();
   }
+
   public static String generateValidPassword() {
     return faker.internet().password();
   }
 
 
   @SneakyThrows
-  public static String generateValidBirthdate(){
+  public static String generateValidBirthdate() {
     LocalDate localDate = LocalDate.now().minusYears(RandomUtils.nextInt(18, 60));
     SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat toFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -48,7 +50,7 @@ public class Helpers extends BasePage{
 
   // Get product list (containers) from page
   @SneakyThrows
-  public  static List<Products> getAllProducts() {
+  public static List<Products> getAllProducts() {
     waitUntilVisible(productContainerLocator, 20);
     List<Products> product = new ArrayList<>();
     List<WebElement> containers = findAll(productContainerLocator);
@@ -58,7 +60,6 @@ public class Helpers extends BasePage{
     }
     return product;
   }
-
 
 
 }

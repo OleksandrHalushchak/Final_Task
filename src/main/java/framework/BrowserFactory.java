@@ -14,7 +14,7 @@ public class BrowserFactory {
     switch (browser) {
       case CHROME:
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--remote-allow-origins=*","ignore-certificate-errors");
+        chromeOptions.addArguments("--remote-allow-origins=*", "ignore-certificate-errors");
         WebDriverManager.chromedriver().setup();
         return new ChromeDriver(chromeOptions);
       case SAFARI:

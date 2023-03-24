@@ -1,6 +1,5 @@
 package ui;
 
-import framework.Helpers;
 import framework.MainPage;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,7 @@ public class TestCase5CheckCategories extends BaseTest {
     expectedClotheList.add("MEN");
     expectedClotheList.add("WOMEN");
 
-    List<String>  actualClotheList = mainPage.getClothesCategoriesList();
+    List<String> actualClotheList = mainPage.getClothesCategoriesList();
 
     softAssertions.assertThat(actualClotheList)
         .as("EXPECTED" + expectedClotheList)
@@ -30,11 +29,11 @@ public class TestCase5CheckCategories extends BaseTest {
 
 //Check that 'STATIONERY' and 'HOME ACCESSORIES' sub menu items appears in "ACCESSORIES" menu
 
-   List<String> expectedAccessoriesList = new ArrayList<>();
+    List<String> expectedAccessoriesList = new ArrayList<>();
     expectedAccessoriesList.add("STATIONERY");
     expectedAccessoriesList.add("HOME ACCESSORIES");
 
-    List<String>  actualAccessoriesList = mainPage.getAccessorCategoriesList();
+    List<String> actualAccessoriesList = mainPage.getAccessorCategoriesList();
 
     softAssertions.assertThat(actualAccessoriesList)
         .as("EXPECTED" + expectedClotheList)
@@ -42,8 +41,7 @@ public class TestCase5CheckCategories extends BaseTest {
 
 //Check nothing appears in "ART" menu
 
-
-    List<String>  actualArtList = mainPage.getArtCategoriesList();
+    List<String> actualArtList = mainPage.getArtCategoriesList();
 
     softAssertions.assertThat(actualArtList)
         .as("EXPECTED empty fild")
