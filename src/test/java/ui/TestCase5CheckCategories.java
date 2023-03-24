@@ -1,6 +1,7 @@
 package ui;
 
 import framework.MainPage;
+import framework.MainPage.SortEnum;
 import java.util.ArrayList;
 import java.util.List;
 import org.assertj.core.api.Assertions;
@@ -21,7 +22,7 @@ public class TestCase5CheckCategories extends BaseTest {
     expectedClotheList.add("MEN");
     expectedClotheList.add("WOMEN");
 
-    List<String> actualClotheList = mainPage.getClothesCategoriesList();
+    List<String> actualClotheList = mainPage.getCategoriesList(SortEnum.Clothes);
 
     softAssertions.assertThat(actualClotheList)
         .as("EXPECTED" + expectedClotheList)
@@ -33,7 +34,7 @@ public class TestCase5CheckCategories extends BaseTest {
     expectedAccessoriesList.add("STATIONERY");
     expectedAccessoriesList.add("HOME ACCESSORIES");
 
-    List<String> actualAccessoriesList = mainPage.getAccessorCategoriesList();
+    List<String> actualAccessoriesList = mainPage.getCategoriesList(SortEnum.Accessor);
 
     softAssertions.assertThat(actualAccessoriesList)
         .as("EXPECTED" + expectedClotheList)
@@ -41,7 +42,7 @@ public class TestCase5CheckCategories extends BaseTest {
 
 //Check nothing appears in "ART" menu
 
-    List<String> actualArtList = mainPage.getArtCategoriesList();
+    List<String> actualArtList = mainPage.getCategoriesList(SortEnum.Art);
 
     softAssertions.assertThat(actualArtList)
         .as("EXPECTED empty fild")

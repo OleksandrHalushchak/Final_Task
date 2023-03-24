@@ -1,5 +1,6 @@
 package framework;
 
+import framework.AllProductsPage.SortEnum;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.SneakyThrows;
@@ -144,39 +145,45 @@ public class MainPage extends BasePage {
     return new SignInPage();
   }
 
-  public List<String> getClothesCategoriesList() {
-    hoverMouse(menuClothesLocator);
-    waitUntilVisible(menuClothesLocator, 10);
-    List<String> clothesCategories = new ArrayList<>();
-    List<WebElement> category = findAll(subMenuClothesLocator);
-    for (WebElement webElement : category) {
-      clothesCategories.add(webElement.getText());
+  public List<String> getCategoriesList(SortEnum value) {
+
+    switch (value) {
+      case Clothes:
+        hoverMouse(menuClothesLocator);
+        waitUntilVisible(menuClothesLocator, 10);
+        List<String> clothesCategories = new ArrayList<>();
+        List<WebElement> categoryClothes = findAll(subMenuClothesLocator);
+        for (WebElement webElement : categoryClothes) {
+          clothesCategories.add(webElement.getText());
+        }
+        return clothesCategories;
+      case Accessor:
+        hoverMouse(menuAccessoriesLocator);
+        waitUntilVisible(menuAccessoriesLocator, 10);
+        List<String> accessorCategories = new ArrayList<>();
+        List<WebElement> categoryAccessories = findAll(subMenuAccessoriesLocator);
+        for (WebElement webElement : categoryAccessories) {
+          accessorCategories.add(webElement.getText());
+        }
+        return accessorCategories;
+      case Art:
+        hoverMouse(menuArtLocator);
+        waitUntilVisible(menuArtLocator, 10);
+        List<String> artCategories = new ArrayList<>();
+        List<WebElement> categoryArt = findAll(subMenuArtLocator);
+        for (WebElement webElement : categoryArt) {
+          artCategories.add(webElement.getText());
+        }
+        return artCategories;
     }
-    return clothesCategories;
+    return null;
   }
 
-  public List<String> getAccessorCategoriesList() {
-    hoverMouse(menuAccessoriesLocator);
-    waitUntilVisible(menuAccessoriesLocator, 10);
-    List<String> accessorCategories = new ArrayList<>();
-    List<WebElement> category = findAll(subMenuAccessoriesLocator);
-    for (WebElement webElement : category) {
-      accessorCategories.add(webElement.getText());
-    }
-    return accessorCategories;
+  public enum SortEnum {
+    Clothes,
+    Accessor,
+    Art
   }
-
-  public List<String> getArtCategoriesList() {
-    hoverMouse(menuArtLocator);
-    waitUntilVisible(menuArtLocator, 10);
-    List<String> artCategories = new ArrayList<>();
-    List<WebElement> category = findAll(subMenuArtLocator);
-    for (WebElement webElement : category) {
-      artCategories.add(webElement.getText());
-    }
-    return artCategories;
-  }
-
 
   // At the bottom of the page click on 'Prices drop' link
   public PriceDropPage clickPricesDrop() {
