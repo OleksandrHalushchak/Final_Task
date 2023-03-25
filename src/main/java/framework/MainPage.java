@@ -1,6 +1,5 @@
 package framework;
 
-import framework.AllProductsPage.SortEnum;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.SneakyThrows;
@@ -90,7 +89,7 @@ public class MainPage extends BasePage {
       "//button[@name='submitCustomizedData']");
 
   // wait while the home page loads
-  public MainPage waitUntilHomePageLoad() {
+  public void waitUntilHomePageLoad() {
     try {
       waitUntilAppear(loadingMessageLocator, 10);
     } catch (TimeoutException e) {
@@ -99,7 +98,6 @@ public class MainPage extends BasePage {
     log.info("The spinner appeared");
     waitUntilDisappear(loadingMessageLocator, 20);
     log.info("Tests waits while The spinner disappeared");
-    return this;
   }
 
   // Get text  near the email field on the buttom of the page
@@ -150,30 +148,36 @@ public class MainPage extends BasePage {
     switch (value) {
       case Clothes:
         hoverMouse(menuClothesLocator);
+        log.info("Hover mouse to the menu clothes");
         waitUntilVisible(menuClothesLocator, 10);
         List<String> clothesCategories = new ArrayList<>();
         List<WebElement> categoryClothes = findAll(subMenuClothesLocator);
         for (WebElement webElement : categoryClothes) {
           clothesCategories.add(webElement.getText());
         }
+        log.info("Get submenu text the menu clothes");
         return clothesCategories;
       case Accessor:
         hoverMouse(menuAccessoriesLocator);
+        log.info("Hover mouse to the menu accessories");
         waitUntilVisible(menuAccessoriesLocator, 10);
         List<String> accessorCategories = new ArrayList<>();
         List<WebElement> categoryAccessories = findAll(subMenuAccessoriesLocator);
         for (WebElement webElement : categoryAccessories) {
           accessorCategories.add(webElement.getText());
         }
+        log.info("Get submenu text the menu accessories");
         return accessorCategories;
       case Art:
         hoverMouse(menuArtLocator);
+        log.info("Hover mouse to the menu art");
         waitUntilVisible(menuArtLocator, 10);
         List<String> artCategories = new ArrayList<>();
         List<WebElement> categoryArt = findAll(subMenuArtLocator);
         for (WebElement webElement : categoryArt) {
           artCategories.add(webElement.getText());
         }
+        log.info("Get submenu text the menu art");
         return artCategories;
     }
     return null;
@@ -186,12 +190,12 @@ public class MainPage extends BasePage {
   }
 
   // At the bottom of the page click on 'Prices drop' link
-  public PriceDropPage clickPricesDrop() {
+  public void clickPricesDrop() {
     scrollPageBottom();
     log.info("Page scrolls down");
     find(pricesDropLocator).click();
     log.info("click Prices drop");
-    return new PriceDropPage();
+    new PriceDropPage();
   }
 
   // click on 'All products' link
@@ -204,61 +208,68 @@ public class MainPage extends BasePage {
   }
 
   // In the search field enter text press 'Enter'
-  public MainPage enterTextInSearchField(String productName) {
+  public void enterTextInSearchField(String productName) {
     WebElement searchField = find(searchFieldLocator);
     searchField.sendKeys(productName);
+    log.info("In the search field sent {}", productName);
     searchField.sendKeys(Keys.RETURN);
-    return this;
+    log.info("pressed 'Enter'");
   }
 
   // Select 'Paper type'
   public MainPage selectPaperType(String paperType) {
     waitUntilVisible(paperTypeSelectorLocator, 5);
     selectByText(paperTypeSelectorLocator, paperType);
+    log.info("Select 'Paper type' as {}", paperType);
     return this;
   }
 
-  // Change 'Quantity' to '5'
+  // Change 'Quantity'
   public MainPage changeQuantity(int quantity) {
 
     for (int i = 1; i < quantity; i++) {
       find(quantityLocator).click();
     }
+    log.info("Change 'Quantity' to {}", quantity);
     return this;
   }
 
   // Click 'ADD TO CART' button
-  public MainPage clickAddToCartButton() {
+  public void clickAddToCartButton() {
     find(addToCartButtonLocator).click();
-    return this;
   }
 
   // Get shopping cart title
   public String getTitle() {
     waitUntilAppear(windowTitleLocator, 20);
+    log.info("Get shopping cart title");
     return find(windowTitleLocator).getText();
   }
 
   // Get shopping cart 'Paper Type'
   public String getPaperType() {
+    log.info("Get shopping cart 'Paper Type'");
     return find(paperTypeShoppingCartLocator).getText();
   }
 
   // Get shopping cart 'Quantity'
   public String getQuantity() {
+    log.info("Get shopping cart 'Quantity'");
     return find(quantityShoppingCartLocator).getText();
   }
 
   // Get shopping cart 'Total' price
   public String getTotalPrice() {
+    log.info("Get shopping cart 'Total' price");
     return find(totalPriceShoppingCartLocator).getText();
   }
-
 
   // Enter text in 'Product customization' field and save
   public MainPage enterTextProductCustomization(String text) {
     find(productCustomizationFieldLocator).sendKeys(text);
+    log.info("Enter text in 'Product customization' field");
     find(saveCustomizationButtonLocator).click();
+    log.info("Click save Customization Button");
     return this;
   }
 

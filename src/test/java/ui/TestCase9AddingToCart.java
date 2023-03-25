@@ -6,15 +6,16 @@ import framework.Helpers;
 import framework.MainPage;
 import java.math.BigDecimal;
 import java.util.List;
+import lombok.extern.log4j.Log4j2;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
+@Log4j2
 public class TestCase9AddingToCart extends BaseTest {
 
   private final MainPage mainPage = new MainPage();
 
   @Test
-
   public void checkPriceDrop() {
     SoftAssertions softAssertions = new SoftAssertions();
 
@@ -39,17 +40,20 @@ public class TestCase9AddingToCart extends BaseTest {
         .clickAddToCartButton();
 
     //Check that new window with title 'Product successfully added to your shopping cart' appears
+    log.info("Check that new window with title 'Product successfully added to your shopping cart'"
+        + " appears");
     String expectedTitle = "Product successfully added to your shopping cart";
     String actualTitle = mainPage.getTitle();
-    if (actualTitle.isEmpty()) {
-    } else {
+//    if (actualTitle.isEmpty()) {
+//    } else {
       actualTitle = actualTitle.substring(1);
-    }
+//    }
     softAssertions.assertThat(actualTitle)
         .as("EXPECTED " + expectedTitle)
         .isEqualTo(expectedTitle);
 
     //Check that correct 'Paper Type' is shown on the left side of the window
+    log.info("Check that correct 'Paper Type' is shown on the left side of the window");
     String expectedPaperTyp = "Doted";
     String actualPaperTyp = mainPage.getPaperType();
 
@@ -59,6 +63,9 @@ public class TestCase9AddingToCart extends BaseTest {
 
     //Check that correct 'Quantity' is shown on the left side of the window
     String expectedQuantity = "5";
+    log.info("Check that  'Quantity' {} is shown on the left side of the window",
+        expectedQuantity);
+
     String actualQuantity = mainPage.getQuantity();
 
     softAssertions.assertThat(actualQuantity)
@@ -66,12 +73,15 @@ public class TestCase9AddingToCart extends BaseTest {
         .isEqualTo(expectedQuantity);
 
     //Check that Check that 'Total' calculated correct
+    log.info("Check that Check that 'Total' calculated correct");
     productPrice = productPrice.substring(1);
     BigDecimal productPriceBD = new BigDecimal(productPrice);
     BigDecimal actualQuantityBD = new BigDecimal(actualQuantity);
 
     BigDecimal expectedTotalPriceBD = productPriceBD.multiply(actualQuantityBD);
     String expectedTotalPrice = expectedTotalPriceBD.toString();
+    log.info("Expected total price {}", expectedTotalPrice);
+
     String actualTotalPrice = mainPage.getTotalPrice();
     actualTotalPrice = actualTotalPrice.substring(1);
 

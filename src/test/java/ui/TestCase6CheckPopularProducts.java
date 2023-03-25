@@ -4,9 +4,11 @@ import components.Products;
 import framework.Helpers;
 import framework.MainPage;
 import java.util.List;
+import lombok.extern.log4j.Log4j2;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
+@Log4j2
 public class TestCase6CheckPopularProducts extends BaseTest {
 
   private final MainPage mainPage = new MainPage();
@@ -18,20 +20,27 @@ public class TestCase6CheckPopularProducts extends BaseTest {
 
     //Check that 8 products exist in 'POPULAR PRODUCTS' section
     int expctedNumberOfProducts = 8;
+    log.info("Check that {} products exist in 'POPULAR PRODUCTS' section",
+        expctedNumberOfProducts);
 
-    int actualNumberOfProducts = Helpers.getAllProducts().size();
+    List<Products> products = Helpers.getAllProducts();
+    int actualNumberOfProducts = products.size();
 
     softAssertions.assertThat(actualNumberOfProducts)
         .as("EXPECTED" + expctedNumberOfProducts)
         .isEqualTo(expctedNumberOfProducts);
 
-    // Get product list
-    List<Products> products = Helpers.getAllProducts();
+
 
     // Check that  product list not empty
+    log.info("Check that  product list not empty");
     softAssertions.assertThat(products)
         .as("EXPECTED that list not empty")
         .isNotNull();
+
+    log.info("Check that every product has name");
+    log.info("Check that every product has price");
+    log.info("Check that every product  price bigger than 0.00");
 
     for (Products product : products) {
 

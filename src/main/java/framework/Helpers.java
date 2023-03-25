@@ -7,12 +7,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import lombok.SneakyThrows;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+@Log4j2
 public class Helpers extends BasePage {
 
   // Product container locator
@@ -52,12 +53,14 @@ public class Helpers extends BasePage {
   @SneakyThrows
   public static List<Products> getAllProducts() {
     waitUntilVisible(productContainerLocator, 20);
+    log.info("Wait until containers will visible");
     List<Products> product = new ArrayList<>();
     List<WebElement> containers = findAll(productContainerLocator);
     for (WebElement container : containers) {
       Products productComponent = new Products(container);
       product.add(productComponent);
     }
+    log.info("Get product list all containers of the page");
     return product;
   }
 

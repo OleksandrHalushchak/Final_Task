@@ -5,9 +5,11 @@ import framework.Helpers;
 import framework.MainPage;
 import framework.PriceDropPage;
 import java.util.List;
+import lombok.extern.log4j.Log4j2;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
+@Log4j2
 public class TestCase7PriceDropCheck extends BaseTest {
 
   private final MainPage mainPage = new MainPage();
@@ -18,14 +20,17 @@ public class TestCase7PriceDropCheck extends BaseTest {
     SoftAssertions softAssertions = new SoftAssertions();
 
     //Check that every product has old and new price
+    log.info("Check that every product has old and new price");
     mainPage.clickPricesDrop();
     List<Products> products = Helpers.getAllProducts();
 
     // Check that  product list not empty
+    log.info("Check that  product list not empty");
     softAssertions.assertThat(products)
         .as("EXPECTED that list not empty")
         .isNotEmpty();
 
+    log.info("Check that promo price for every product calculates correct");
     for (Products product : products) {
 
       // Check that every product has old price
@@ -50,9 +55,7 @@ public class TestCase7PriceDropCheck extends BaseTest {
       softAssertions.assertThat(actualProductPrice)
           .as("EXPECTED " + expectedProductPrice)
           .isEqualTo(expectedProductPrice);
-
     }
-
     softAssertions.assertAll();
   }
 }

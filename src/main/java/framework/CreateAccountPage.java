@@ -1,9 +1,10 @@
 package framework;
 
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 
-
+@Log4j2
 public class CreateAccountPage extends BasePage {
 
   private final By createAccountSocialTitleLocator = By.id("field-id_gender-1");
@@ -41,29 +42,35 @@ public class CreateAccountPage extends BasePage {
     find(createAccountCustomerPrivacyLocator).click();
     // Сheckbox I agree
     find(createAccountCustomerIAgreeLocator).click();
+    log.info("Account Created with FirstName - {}; LastName - {}; Email - {}; Password - {};"
+        + " Birthdate - {}", FirstName, LastName, Email, Password, Birthdate);
     return this;
   }
 
   // Click SAVE (valid data)
   public SignInPage clickSaveButtonValidData() {
     find(createAccountSaveButtonLocator).click();
+    log.info("Click save");
     return new SignInPage();
   }
 
   // Click SAVE (invalid data)
-  public CreateAccountPage clickSaveButtonInvalidData() {
+  public void clickSaveButtonInvalidData() {
     find(createAccountSaveButtonLocator).click();
-    return this;
+    log.info("Click save");
   }
 
   // Get pop up text appear under field
   public String getPopUpText() {
     waitUntilVisible(popUpFieldLocator, 5);
+    log.info("Get pop up text appear under field");
     return find(popUpFieldLocator).getText();
   }
 
   // Get higlighted colof of fild 'First name'
   public String getLineColor() {
-    return getDriver().findElement(createAccountFirstNameFieldLocator).getCssValue("outline");
+    log.info("Get higlighted colof of fild 'First name'");
+    return getDriver().findElement(createAccountFirstNameFieldLocator)
+        .getCssValue("outline");
   }
 }

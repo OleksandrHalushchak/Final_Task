@@ -15,6 +15,8 @@ public class TestCase3ValidData extends BaseTest {
 //Check your name appear near cart button after registration with valid data
   public void checkNameNearCartButton() {
 
+    log.info("Check your name appear near cart button after registration with valid data>"
+        + " will run");
     String expectedFirstName = Helpers.generateValidFirstName();
     String expectedLastName = Helpers.generateValidLastName();
     String expectedName = expectedFirstName + " " + expectedLastName;
@@ -24,6 +26,8 @@ public class TestCase3ValidData extends BaseTest {
         .createAccount(expectedFirstName, expectedLastName, Helpers.generateValidEmail(),
             Helpers.generateValidPassword(), Helpers.generateValidBirthdate())
         .clickSaveButtonValidData().getUserNameNearCartButton();
-    Assertions.assertThat(actualName).as("EXPECTED" + expectedName).isEqualTo(expectedName);
+
+    Assertions.assertThat(actualName).as("EXPECTED" + expectedName)
+        .isEqualTo(expectedName);
   }
 }
