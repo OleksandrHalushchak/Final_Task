@@ -38,18 +38,18 @@ public class BasePage {
     return getDriver().findElements(locator);
   }
 
-  public static WebElement waitUntilVisible(By locator, int seconds) {
-    return new WebDriverWait(getDriver(), Duration.ofSeconds(seconds))
+  public static void waitUntilVisible(By locator, int seconds) {
+    new WebDriverWait(getDriver(), Duration.ofSeconds(seconds))
         .until(ExpectedConditions.presenceOfElementLocated(locator));
   }
 
-  public WebElement waitUntilAppear(By locator, int seconds) {
-    return new WebDriverWait(getDriver(), Duration.ofSeconds(seconds))
+  public void waitUntilAppear(By locator, int seconds) {
+    new WebDriverWait(getDriver(), Duration.ofSeconds(seconds))
         .until(ExpectedConditions.visibilityOfElementLocated(locator));
   }
 
-  public Boolean waitUntilDisappear(By locator, int seconds) {
-    return new WebDriverWait(getDriver(), Duration.ofSeconds(seconds))
+  public void waitUntilDisappear(By locator, int seconds) {
+    new WebDriverWait(getDriver(), Duration.ofSeconds(seconds))
         .until(ExpectedConditions.invisibilityOfElementLocated(locator));
   }
 
@@ -66,18 +66,6 @@ public class BasePage {
   public void selectByText(By selectLocator, String text) {
     Select select = new Select(getDriver().findElement(selectLocator));
     select.selectByVisibleText(text);
-  }
-
-  // Sort products by 'argument'
-  public void sortByDropdown(By Locator, String text) {
-    Select selectSortBy = new Select(find(Locator));
-    selectSortBy.selectByVisibleText(text);
-  }
-
-
-  public String getSelectedValue(By selectLocator) {
-    Select select = new Select(getDriver().findElement(selectLocator));
-    return select.getFirstSelectedOption().getText();
   }
 
   public void hoverMouse(By locator) {

@@ -15,8 +15,6 @@ public class MainPage extends BasePage {
 
   // Loading Message
   private static final By loadingMessageLocator = By.id("loadingMessage");
-  //frame Locator
-  private final By frameLocator = By.id("framelive");
 
   //text on the buttom of the page near the email field
   private final By buttomPageTextNearEmailFieldLocator = By.id("block-newsletter-label");
@@ -49,9 +47,6 @@ public class MainPage extends BasePage {
   private final By subMenuAccessoriesLocator = By.xpath("//*[@id='category-6']//li//a");
   private final By subMenuArtLocator = By.xpath("//*[@id='category-9']//li//a");
 
-  // 'All products >' under the 'POPULAR PRODUCTS' section
-  private final By allProductsLocator = By.xpath(
-      "//a[@class='all-product-link float-xs-left float-md-right h4']");
 
   // Prices drop locator at the bottom of the page
   private final By pricesDropLocator = By.id("link-product-page-prices-drop-1");
@@ -80,13 +75,6 @@ public class MainPage extends BasePage {
 
   //shopping cart 'Total' price
   private final By totalPriceShoppingCartLocator = By.xpath("//span[@class='value']");
-
-  // 'Product customization' field
-  private final By productCustomizationFieldLocator = By.id("field-textField1");
-
-  // 'SAVE CUSTOMIZATION' button
-  private final By saveCustomizationButtonLocator = By.xpath(
-      "//button[@name='submitCustomizedData']");
 
   // wait while the home page loads
   public void waitUntilHomePageLoad() {
@@ -198,15 +186,6 @@ public class MainPage extends BasePage {
     new PriceDropPage();
   }
 
-  // click on 'All products' link
-  public AllProductsPage clickAllProductsLink() {
-    scroll(1000);
-    log.info("Page scrolls down");
-    find(allProductsLocator).click();
-    log.info("click on 'All products' link");
-    return new AllProductsPage();
-  }
-
   // In the search field enter text press 'Enter'
   public void enterTextInSearchField(String productName) {
     WebElement searchField = find(searchFieldLocator);
@@ -262,15 +241,6 @@ public class MainPage extends BasePage {
   public String getTotalPrice() {
     log.info("Get shopping cart 'Total' price");
     return find(totalPriceShoppingCartLocator).getText();
-  }
-
-  // Enter text in 'Product customization' field and save
-  public MainPage enterTextProductCustomization(String text) {
-    find(productCustomizationFieldLocator).sendKeys(text);
-    log.info("Enter text in 'Product customization' field");
-    find(saveCustomizationButtonLocator).click();
-    log.info("Click save Customization Button");
-    return this;
   }
 
 }
